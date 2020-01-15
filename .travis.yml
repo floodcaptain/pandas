@@ -91,12 +91,13 @@ before_install:
 install:
   - echo "install start"
   - ci/prep_cython_cache.sh
-  - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
-     chmod 777 ci/setup_env_arm64.sh;
-     ci/setup_env_arm64.sh;
-    else
-     ci/setup_env.sh;
-    fi
+  script:
+    - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
+       chmod 777 ci/setup_env_arm64.sh;
+       ci/setup_env_arm64.sh; 
+      else
+       ci/setup_env.sh;
+      fi
   - ci/submit_cython_cache.sh
   - echo "install done"
 
